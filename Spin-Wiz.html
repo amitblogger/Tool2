@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SpinSphere - Ultimate customizable spinning wheel for decisions, contests, and fun!">
+    <meta name="keywords" content="spinning wheel, random picker, giveaway tool, decision maker">
+    <title>SpinSphere - Interactive Spinning Wheel</title>
+    <!-- Google Adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+    <style>
+        /* Vibrant CSS Styles */
+        :root {
+            --neon-pink: #ff00ff;
+            --neon-blue: #00ffff;
+            --neon-green: #00ff00;
+            --gradient-bg: linear-gradient(45deg, #2a2a2a, #1a1a1a);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--gradient-bg);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .title {
+            font-size: 3rem;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 2rem auto;
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        #wheel {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .segment {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(50% 50%, 100% 50%, 100% 0);
+            transform-origin: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 5px black;
+            transition: all 0.3s ease;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            width: 100%;
+            max-width: 800px;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .customization-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        input, select, button {
+            padding: 0.8rem;
+            border: 2px solid var(--neon-blue);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        button {
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            filter: brightness(1.2);
+            box-shadow: 0 0 15px var(--neon-pink);
+        }
+
+        #ad-container {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        /* Animation */
+        @keyframes glow {
+            0% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+            100% { filter: brightness(1); }
+        }
+
+        .glow {
+            animation: glow 2s infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .wheel-container {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="title glow">SPINSPHERE</h1>
+        <p>Create Magical Spinning Experiences!</p>
+    </header>
+
+    <main>
+        <div class="wheel-container">
+            <div id="wheel"></div>
+        </div>
+
+        <div class="controls">
+            <div class="customization-panel">
+                <input type="text" id="segment-input" placeholder="Enter segment text">
+                <input type="color" id="segment-color" value="#ff00ff">
+                <button id="add-segment">Add Segment</button>
+                <button id="spin-btn">SPIN NOW!</button>
+                <select id="theme-select">
+                    <option value="neon">Neon Theme</option>
+                    <option value="pastel">Pastel Theme</option>
+                    <option value="dark">Dark Theme</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="ad-container">
+            <!-- Google Adsense Ad Unit -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="YOUR_ADSENSE_ID"
+                data-ad-slot="XXXXXXXXXX"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+        </div>
+    </main>
+
+    <script>
+        // Dynamic Functionality
+        const wheel = document.getElementById('wheel');
+        const addSegmentBtn = document.getElementById('add-segment');
+        const spinBtn = document.getElementById('spin-btn');
+        const segmentInput = document.getElementById('segment-input');
+        const colorPicker = document.getElementById('segment-color');
+        const themeSelect = document.getElementById('theme-select');
+        
+        let segments = [];
+        let currentRotation = 0;
+
+        // Add Segment
+        addSegmentBtn.addEventListener('click', () => {
+            const text = segmentInput.value.trim();
+            if(text) {
+                segments.push({
+                    text,
+                    color: colorPicker.value
+                });
+                renderWheel();
+                segmentInput.value = '';
+            }
+        });
+
+        // Spin Wheel
+        spinBtn.addEventListener('click', () => {
+            if(segments.length < 2) return;
+            
+            const randomRotation = Math.floor(Math.random() * 3600) + 3600;
+            currentRotation += randomRotation;
+            
+            wheel.style.transform = `rotate(${currentRotation}deg)`;
+            
+            setTimeout(() => {
+                const actualRotation = currentRotation % 360;
+                const segmentAngle = 360 / segments.length;
+                const selectedIndex = Math.floor((360 - actualRotation) / segmentAngle);
+                showResult(segments[selectedIndex].text);
+            }, 4000);
+        });
+
+        // Theme Management
+        themeSelect.addEventListener('change', () => {
+            document.body.className = themeSelect.value;
+            renderWheel();
+        });
+
+        // Render Wheel
+        function renderWheel() {
+            wheel.innerHTML = '';
+            const angle = 360 / segments.length;
+            
+            segments.forEach((segment, index) => {
+                const segmentEl = document.createElement('div');
+                segmentEl.className = 'segment';
+                segmentEl.style.backgroundColor = segment.color;
+                segmentEl.style.transform = `rotate(${angle * index}deg)`;
+                segmentEl.innerHTML = `
+                    <div style="transform: rotate(${angle/2}deg)">
+                        ${segment.text}
+                    </div>
+                `;
+                wheel.appendChild(segmentEl);
+            });
+        }
+
+        // Show Results
+        function showResult(text) {
+            const resultEl = document.createElement('div');
+            resultEl.style.position = 'fixed';
+            resultEl.style.top = '50%';
+            resultEl.style.left = '50%';
+            resultEl.style.transform = 'translate(-50%, -50%)';
+            resultEl.style.padding = '2rem';
+            resultEl.style.background = 'rgba(0,0,0,0.9)';
+            resultEl.style.borderRadius = '15px';
+            resultEl.style.border = '2px solid var(--neon-pink)';
+            resultEl.style.boxShadow = '0 0 30px var(--neon-pink)';
+            resultEl.innerHTML = `
+                <h2>RESULT: ${text}</h2>
+                <button onclick="this.parentElement.remove()">Close</button>
+            `;
+            document.body.appendChild(resultEl);
+        }
+
+        // Initialize Ads
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>
