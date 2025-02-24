@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SpinSphere - Create beautiful spinning wheels for decisions, games, and business needs">
+    <title>SpinSphere | Interactive Spinning Wheel Maker</title>
+    <style>
+        /* Modern Color Scheme */
+        :root {
+            --primary: #6366f1;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+
+        body {
+            background: var(--light);
+            color: var(--dark);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: var(--dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .category-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .category-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .subcategory-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .subcategory-item {
+            padding: 0.5rem 1rem;
+            margin: 0.5rem 0;
+            background: #f1f5f9;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .subcategory-item::before {
+            content: "•";
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .customization-panel {
+            background: white;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .cta-button {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            border: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .cta-button:hover {
+            background: #4f46e5;
+            transform: scale(1.05);
+        }
+
+        /* Ad Space */
+        .ad-container {
+            background: #f8fafc;
+            padding: 1rem;
+            margin: 2rem auto;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .category-grid {
+                padding: 1rem;
+            }
+            
+            .category-card {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🎡 SpinSphere</h1>
+        <p>Create Perfect Spinning Wheels for Every Occasion</p>
+    </header>
+
+    <main>
+        <!-- Categories Section -->
+        <section class="category-grid">
+            <!-- Casual Users -->
+            /* Subcategory links */
+.subcategory-link {
+    color: var(--dark);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.subcategory-link:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+/* CTA button as link */
+a.cta-button {
+    display: inline-block;
+    text-decoration: none;
+    /* Keep existing button styles from previous CSS */
+    background: var(--primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+a.cta-button:hover {
+    background: #4f46e5;
+    transform: scale(1.05);
+    text-decoration: none;
+}
+
+            <!-- Event Planners -->
+            <div class="category-card">
+                <div class="category-icon">🎪</div>
+                <h2>Event Planners</h2>
+                <ul class="subcategory-list">
+                    <li class="subcategory-item">Wedding Entertainment</li>
+                    <li class="subcategory-item">Corporate Events</li>
+                    <li class="subcategory-item">Fundraisers</li>
+                </ul>
+                <button class="cta-button">Create Event Wheel</button>
+            </div>
+
+            <!-- Business Users -->
+            <div class="category-card">
+                <div class="category-icon">💼</div>
+                <h2>Business Tools</h2>
+                <ul class="subcategory-list">
+                    <li class="subcategory-item">Sales Promotions</li>
+                    <li class="subcategory-item">Employee Rewards</li>
+                    <li class="subcategory-item">Client Engagement</li>
+                </ul>
+                <button class="cta-button">Business Solutions</button>
+            </div>
+        </section>
+
+        <!-- Customization Section -->
+        <section class="customization-panel">
+            <h2>Customization Options</h2>
+            <div class="customization-grid">
+                <!-- Add customization controls here -->
+            </div>
+        </section>
+
+        <!-- Ad Space -->
+        <div class="ad-container">
+            <!-- Google AdSense Code -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_ADSENSE_ID"
+            crossorigin="anonymous"></script>
+        </div>
+    </main>
+
+    <footer>
+        <!-- Footer content -->
+    </footer>
+</body>
+</html>
